@@ -2279,6 +2279,10 @@ class Client(BaseClient):
 
         """
         return self._request_margin_api('post', 'asset/dust', True, data=params)
+    
+    def get_dust_assets(self, **params):
+
+        return self._request_margin_api('post', 'asset/dust-btc', True, data=params)
 
     def get_asset_dividend_history(self, **params):
         """Query asset dividend record.
@@ -3122,6 +3126,10 @@ class Client(BaseClient):
     def disable_isolated_margin_account(self, **params):
 
         return self._request_margin_api('delete', 'margin/isolated/account', signed=True, data=params)
+    
+    def query_isolated_account(self, **params):
+
+        return self._request_margin_api('get', '/margin/isolated/account', True, data=params)
 
     def get_isolated_margin_symbol(self, **params):
         """Query isolated margin symbol info
@@ -7581,6 +7589,10 @@ class AsyncClient(BaseClient):
     async def transfer_dust(self, **params):
         return await self._request_margin_api('post', 'asset/dust', True, data=params)
     transfer_dust.__doc__ = Client.transfer_dust.__doc__
+    
+    async def get_dust_assets(self, **params):
+        return await self._request_margin_api('post', 'asset/dust-btc', True, data=params)
+    get_dust_assets.__doc__ = Client.get_dust_assets.__doc__
 
     async def get_asset_dividend_history(self, **params):
         return await self._request_margin_api('get', 'asset/assetDividend', True, data=params)
@@ -7682,6 +7694,9 @@ class AsyncClient(BaseClient):
     
     async def disable_isolated_margin_account(self, **params):
         return await self._request_margin_api('delete', 'margin/isolated/account', signed=True, data=params)
+    
+    async def query_isolated_account(self, **params):
+        return await self._request_margin_api('get', 'margin/isolated/account', signed=True, data=params)
 
     async def get_isolated_margin_symbol(self, **params):
         return await self._request_margin_api('get', 'margin/isolated/pair', signed=True, data=params)
